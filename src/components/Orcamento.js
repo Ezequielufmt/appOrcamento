@@ -1,29 +1,41 @@
 import * as React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, TextInput,  Alert } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity, TextInput, Image } from 'react-native';
 
 
-
-
+const btnVoltar = require('../img/arrow.png');
 
 export default class Orcamento extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {text: ''};
-  };
+  //constructor(props) {
+  //  super(props);
+  // this.state = {text: ''};
+  //};
 
   render() {
     return (
       <View style={styles.container}>
 
-        <View style={styles.viewTitle}>        
-          <Text style={styles.viewTitleText}>Orçamento</Text>
+        <View style={styles.viewTitle}>
+          <TouchableOpacity  style={styles.btnVoltar} 
+            onPress={() => {
+              this.props.varNavigator.pop();
+            }}
+          >
+            <Image source={btnVoltar} />
+          </TouchableOpacity>        
+          <Text style={styles.viewTitleText}>Orçamento</Text>          
         </View>
-        <View style={styles.viewMain}>        
+
+        <View style={styles.viewMain}>
+          <Text style={styles.SubTitle}>Adicione produto</Text>
+          <TextInput style={styles.imputBox}
+            placeholder="Nome do cliente"
+           
+           />        
           <Text style={styles.SubTitle}>Adicione produto</Text>
           <TextInput style={styles.imputBox}
             placeholder="Descrição do produto"
-            onChangeText={(text) => this.setState({text})}
+           
            />
           <TextInput style={styles.imputBox}
             placeholder="R$ --"
@@ -34,9 +46,7 @@ export default class Orcamento extends React.Component {
            <TextInput style={styles.imputBox}
             placeholder="Sub-total"
            />
-          <Text style={{padding: 10, fontSize: 42}}>
-            {this.state.text.split(' ').map((word) => word && '🍕').join(' ')}
-          </Text>
+          
           <Text style={styles.labelTotalGeral}>Total geral:</Text>
           <Text style={styles.textTotalGeral}> R$ 0,00</Text>
 
@@ -58,6 +68,7 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     backgroundColor: '#A9C959',
 
+
   },
   imputBox: {
     marginBottom: 10,
@@ -67,9 +78,17 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   viewTitle: {
+    flexDirection: 'row',
     backgroundColor: '#BF3A81',
   },
+  btnVoltar: {
+    marginHorizontal: 10,
+    paddingVertical: 20,    
+    textAlignVertical: 'center',
+    textAlign: 'center',  
+  },
   viewTitleText: {
+    marginLeft: 40,
     paddingVertical: 20,
     fontSize: 30,
     color: 'white',
